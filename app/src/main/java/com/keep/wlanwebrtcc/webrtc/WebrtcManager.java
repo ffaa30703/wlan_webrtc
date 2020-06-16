@@ -2,9 +2,6 @@ package com.keep.wlanwebrtcc.webrtc;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
-
-import org.json.JSONObject;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.Camera1Enumerator;
