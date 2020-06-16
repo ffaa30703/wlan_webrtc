@@ -352,45 +352,6 @@ public class ChatingActivity extends AppCompatActivity {
     }
 
     SignallingClient.SignalingInterface mSignalingInterface = new SignallingClient.SignalingInterface() {
-        @Override
-        public void onRemoteHangUp(String msg) {
-
-        }
-
-        @Override
-        public void onOfferReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onAnswerReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onIceCandidateReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onTryToStart() {
-
-        }
-
-        @Override
-        public void onCreatedRoom() {
-
-        }
-
-        @Override
-        public void onJoinedRoom() {
-
-        }
-
-        @Override
-        public void onNewPeerJoined() {
-
-        }
 
         @Override
         public void callin(String senderIp) {

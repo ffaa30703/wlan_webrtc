@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;
 import org.webrtc.Camera1Enumerator;
+import org.webrtc.Camera2Enumerator;
 import org.webrtc.CameraEnumerator;
 import org.webrtc.DefaultVideoDecoderFactory;
 import org.webrtc.DefaultVideoEncoderFactory;
@@ -115,7 +116,7 @@ public class WebrtcManager {
 
         //Now create a VideoCapturer instance.
 
-        videoCapturerAndroid = createCameraCapturer(new Camera1Enumerator(false));
+        videoCapturerAndroid = createVideoCapturer();
 
         //Create MediaConstraints - Will be useful for specifying video and audio constraints.
         audioConstraints = new MediaConstraints();
@@ -145,6 +146,13 @@ public class WebrtcManager {
         gotUserMedia = true;
     }
 
+    private VideoCapturer createVideoCapturer() {
+        if (Camera2Enumerator.isSupported(mContext.getApplicationContext())) {
+            return createCameraCapturer(new Camera2Enumerator(mContext));
+        } else {
+            return createCameraCapturer(new Camera1Enumerator(true));
+        }
+    }
 
     private VideoCapturer createCameraCapturer(CameraEnumerator enumerator) {
         final String[] deviceNames = enumerator.getDeviceNames();
@@ -179,45 +187,7 @@ public class WebrtcManager {
 
 
     SignallingClient.SignalingInterface mSignalingInterface = new SignallingClient.SignalingInterface() {
-        @Override
-        public void onRemoteHangUp(String msg) {
 
-        }
-
-        @Override
-        public void onOfferReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onAnswerReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onIceCandidateReceived(JSONObject data) {
-
-        }
-
-        @Override
-        public void onTryToStart() {
-
-        }
-
-        @Override
-        public void onCreatedRoom() {
-
-        }
-
-        @Override
-        public void onJoinedRoom() {
-
-        }
-
-        @Override
-        public void onNewPeerJoined() {
-
-        }
 
         @Override
         public void callin(String senderIp) {
@@ -282,7 +252,7 @@ public class WebrtcManager {
                 e.printStackTrace();
             }
             SignallingClient.getInstance().reset();
-            if(mEventUICallBack!=null){
+            if (mEventUICallBack != null) {
                 mEventUICallBack.receiveHungup();
             }
         }
