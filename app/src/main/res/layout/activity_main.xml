@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <EditText
+            android:id="@+id/et_remote_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:ems="7"
+            android:hint="ip"
+            android:text="192.168.1.112"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_remote_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ems="5"
+            android:inputType="textPersonName"
+            android:text="10001"
+            app:layout_constraintStart_toEndOf="@+id/et_remote_ip"
+            app:layout_constraintTop_toTopOf="@+id/et_remote_ip" />
+
+        <EditText
+            android:id="@+id/et_local_port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="5"
+            android:inputType="number"
+            android:text="10001"
+            app:layout_constraintStart_toStartOf="@+id/et_remote_ip"
+            app:layout_constraintTop_toBottomOf="@+id/et_remote_ip" />
+
+        <Button
+            android:id="@+id/bt_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="connect"
+            app:layout_constraintStart_toEndOf="@+id/et_local_port"
+            app:layout_constraintTop_toTopOf="@+id/et_local_port" />
+
+        <TextView
+            android:id="@+id/tv_local_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/et_local_port"
+            app:layout_constraintTop_toBottomOf="@+id/et_local_port" />
+
+        <TextView
+            android:id="@+id/tv_receive_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_local_ip" />
+
+        <EditText
+            android:id="@+id/et_send_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_receive_msg"
+            app:layout_constraintTop_toBottomOf="@+id/tv_receive_msg" />
+
+        <Button
+            android:id="@+id/bt_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="send"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_send_msg" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
