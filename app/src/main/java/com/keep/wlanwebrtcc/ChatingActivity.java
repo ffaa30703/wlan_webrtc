@@ -441,7 +441,7 @@ public class ChatingActivity extends AppCompatActivity {
         }
 
         @Override
-        public void Hungup() {
+        public void receiveHungup() {
             localPeer.close();
             localPeer = null;
             SignallingClient.getInstance().reset();

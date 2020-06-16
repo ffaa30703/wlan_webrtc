@@ -59,7 +59,7 @@ public class SignallingClient {
                 mSignalingInterface.receiveIceCandidate(iceCandidate);
                 break;
             case HUNGUP:
-                mSignalingInterface.Hungup();
+                mSignalingInterface.receiveHungup();
                 break;
 
         }
@@ -150,6 +150,6 @@ public class SignallingClient {
 
         void receiveIceCandidate(IceCandidate iceCandidate);
 
-        void Hungup();
+        void receiveHungup();
     }
 }

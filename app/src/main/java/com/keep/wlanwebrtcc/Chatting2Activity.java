@@ -45,7 +45,11 @@ public class Chatting2Activity extends AppCompatActivity {
     private void start() {
         binding.btCall.setOnClickListener(v -> webrtcManager.doCall(binding.etTartgetIp.getText().toString(), 10001));
         binding.btAnswer.setOnClickListener(v -> webrtcManager.doAnswer());
-        binding.btHungup.setOnClickListener(v -> webrtcManager.doHungup());
+        binding.btHungup.setOnClickListener(v -> {
+            webrtcManager.doHungup();
+            binding.localGlSurfaceView.clearImage();
+            binding.remoteGlSurfaceView.clearImage();
+        });
         webrtcManager.init(binding.localGlSurfaceView, binding.remoteGlSurfaceView);
 
 
@@ -91,6 +95,14 @@ public class Chatting2Activity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            });
+        }
+
+        @Override
+        public void receiveHungup() {
+            runOnUiThread(() -> {
+                binding.localGlSurfaceView.clearImage();
+                binding.remoteGlSurfaceView.clearImage();
             });
         }
     };

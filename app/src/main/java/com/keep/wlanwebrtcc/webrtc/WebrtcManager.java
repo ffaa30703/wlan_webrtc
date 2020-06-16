@@ -56,9 +56,9 @@ public class WebrtcManager {
     PeerConnection localPeer;
 
     MediaConstraints sdpConstraints;
-
-
     EventUICallBack mEventUICallBack;
+    VideoCapturer videoCapturerAndroid;
+
     public WebrtcManager(Context mContext) {
         this.mContext = mContext;
     }
@@ -68,10 +68,22 @@ public class WebrtcManager {
     }
 
     public void doAnswer() {
+        if (videoCapturerAndroid != null) {
+            videoCapturerAndroid.startCapture(1024, 720, 30);
+        }
         SignallingClient.getInstance().answer();
     }
 
     public void doHungup() {
+        localPeer.close();
+        localPeer = null;
+        try {
+            videoCapturerAndroid.stopCapture();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        SignallingClient.getInstance().sendHungup();
+        SignallingClient.getInstance().reset();
 
     }
 
@@ -102,7 +114,7 @@ public class WebrtcManager {
 
 
         //Now create a VideoCapturer instance.
-        VideoCapturer videoCapturerAndroid;
+
         videoCapturerAndroid = createCameraCapturer(new Camera1Enumerator(false));
 
         //Create MediaConstraints - Will be useful for specifying video and audio constraints.
@@ -123,9 +135,6 @@ public class WebrtcManager {
         audioSource = peerConnectionFactory.createAudioSource(audioConstraints);
         localAudioTrack = peerConnectionFactory.createAudioTrack("101", audioSource);
 
-        if (videoCapturerAndroid != null) {
-            videoCapturerAndroid.startCapture(1024, 720, 30);
-        }
 
         // And finally, with our VideoRenderer ready, we
         // can add our renderer to the VideoTrack.
@@ -135,12 +144,6 @@ public class WebrtcManager {
         remoteGlSurfaceView.setMirror(true);
         gotUserMedia = true;
     }
-
-
-
-
-
-
 
 
     private VideoCapturer createCameraCapturer(CameraEnumerator enumerator) {
@@ -173,7 +176,6 @@ public class WebrtcManager {
 
         return null;
     }
-
 
 
     SignallingClient.SignalingInterface mSignalingInterface = new SignallingClient.SignalingInterface() {
@@ -219,7 +221,7 @@ public class WebrtcManager {
 
         @Override
         public void callin(String senderIp) {
-            if(mEventUICallBack!=null)
+            if (mEventUICallBack != null)
                 mEventUICallBack.callin(senderIp);
 //            runOnUiThread(ChatingActivity.this::callIn);
         }
@@ -227,6 +229,9 @@ public class WebrtcManager {
         @Override
         public void receiveAnswer() {
             Log.d(TAG, "receiveAnswer: ");
+            if (videoCapturerAndroid != null) {
+                videoCapturerAndroid.startCapture(1024, 720, 30);
+            }
 
             if (!SignallingClient.getInstance().isStarted && localVideoTrack != null && SignallingClient.getInstance().isChannelReady) {
                 createPeerConnection();
@@ -268,10 +273,18 @@ public class WebrtcManager {
         }
 
         @Override
-        public void Hungup() {
+        public void receiveHungup() {
             localPeer.close();
             localPeer = null;
+            try {
+                videoCapturerAndroid.stopCapture();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             SignallingClient.getInstance().reset();
+            if(mEventUICallBack!=null){
+                mEventUICallBack.receiveHungup();
+            }
         }
     };
 
@@ -359,7 +372,7 @@ public class WebrtcManager {
     private void gotRemoteStream(MediaStream stream) {
         //we have remote video stream. add to the renderer.
         final VideoTrack videoTrack = stream.videoTracks.get(0);
-        if(mEventUICallBack!=null){
+        if (mEventUICallBack != null) {
             mEventUICallBack.showVideo(videoTrack);
         }
 //        runOnUiThread(() -> {
@@ -382,13 +395,15 @@ public class WebrtcManager {
     }
 
     public void setEventUICallback(EventUICallBack eventUICallBack) {
-        mEventUICallBack=eventUICallBack;
+        mEventUICallBack = eventUICallBack;
     }
 
-    public interface EventUICallBack{
+    public interface EventUICallBack {
 
         void callin(String senderIp);
 
         void showVideo(VideoTrack videoTrack);
+
+        void receiveHungup();
     }
 }
