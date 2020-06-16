@@ -9,3 +9,4 @@
       https://github.com/amrfarid140/webrtc-android-codelab
       https://github.com/xmtggh/VideoCalling
 ## 3、如有疑问可留言
+## 4、功能大致实现，UI比较丑，需要进一步完善
