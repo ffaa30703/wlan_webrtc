@@ -276,7 +276,7 @@ public class WebrtcManager {
         Log.d(TAG, "createOffer: ");
         sdpConstraints = new MediaConstraints();
         sdpConstraints.mandatory.add(
-                new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "false"));
+                new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
         sdpConstraints.mandatory.add(
                 new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
         localPeer.createOffer(new CustomSdpObserver("localCreateOffer") {
