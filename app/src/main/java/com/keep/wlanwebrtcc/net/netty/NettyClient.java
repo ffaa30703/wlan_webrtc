@@ -1,11 +1,11 @@
-package com.keep.myapplication.net.netty;
+package com.keep.wlanwebrtcc.net.netty;
 
 
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.keep.myapplication.net.INetClient;
-import com.keep.myapplication.net.Message;
+import com.keep.wlanwebrtcc.net.INetClient;
+import com.keep.wlanwebrtcc.net.Message;
 
 import java.net.InetSocketAddress;
 

@@ -1,14 +1,12 @@
-package com.keep.myapplication;
+package com.keep.wlanwebrtcc;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,9 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.keep.myapplication.databinding.ActivityChatingBinding;
-import com.keep.myapplication.net.Message;
-import com.keep.myapplication.net.NetUtils;
+import com.keep.wlanwebrtcc.databinding.ActivityChatingBinding;
+import com.keep.wlanwebrtcc.net.NetUtils;
 
 import org.json.JSONObject;
 import org.webrtc.AudioSource;

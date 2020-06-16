@@ -1,9 +1,9 @@
-package com.keep.myapplication;
+package com.keep.wlanwebrtcc;
 
 import com.google.gson.Gson;
-import com.keep.myapplication.net.INetClient;
-import com.keep.myapplication.net.Message;
-import com.keep.myapplication.net.netty.NettyClient;
+import com.keep.wlanwebrtcc.net.INetClient;
+import com.keep.wlanwebrtcc.net.Message;
+import com.keep.wlanwebrtcc.net.netty.NettyClient;
 
 import org.json.JSONObject;
 import org.webrtc.IceCandidate;

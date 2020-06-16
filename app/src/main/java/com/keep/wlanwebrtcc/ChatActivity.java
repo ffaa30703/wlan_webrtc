@@ -1,4 +1,4 @@
-package com.keep.myapplication;
+package com.keep.wlanwebrtcc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.keep.myapplication.R;
-import com.keep.myapplication.databinding.ActivityChatBinding;
+import com.keep.wlanwebrtcc.R;
+import com.keep.wlanwebrtcc.databinding.ActivityChatBinding;
 
 import org.webrtc.AudioSource;
 import org.webrtc.AudioTrack;

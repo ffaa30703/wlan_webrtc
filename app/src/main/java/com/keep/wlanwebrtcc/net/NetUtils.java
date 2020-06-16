@@ -1,4 +1,4 @@
-package com.keep.myapplication.net;
+package com.keep.wlanwebrtcc.net;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

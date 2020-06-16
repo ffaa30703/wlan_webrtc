@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.keep.myapplication"
+        applicationId "com.keep.wlanwebrtcc"
         minSdkVersion 17
         targetSdkVersion 29
         versionCode 1

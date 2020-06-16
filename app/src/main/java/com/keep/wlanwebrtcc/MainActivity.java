@@ -1,15 +1,15 @@
-package com.keep.myapplication;
+package com.keep.wlanwebrtcc;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
-import com.keep.myapplication.databinding.ActivityMainBinding;
-import com.keep.myapplication.net.INetClient;
-import com.keep.myapplication.net.Message;
-import com.keep.myapplication.net.NetUtils;
-import com.keep.myapplication.net.netty.NettyClient;
+import com.keep.wlanwebrtcc.databinding.ActivityMainBinding;
+import com.keep.wlanwebrtcc.net.INetClient;
+import com.keep.wlanwebrtcc.net.Message;
+import com.keep.wlanwebrtcc.net.NetUtils;
+import com.keep.wlanwebrtcc.net.netty.NettyClient;
 
 public class MainActivity extends AppCompatActivity {
     INetClient mNetClient;
