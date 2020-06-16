@@ -53,7 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="192.168.101.145"
+                    android:text="192.168.1.120"
                     android:textSize="25sp" />
             </LinearLayout>
 

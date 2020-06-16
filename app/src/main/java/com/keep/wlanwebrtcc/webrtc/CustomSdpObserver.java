@@ -1,4 +1,4 @@
-package com.keep.wlanwebrtcc;
+package com.keep.wlanwebrtcc.webrtc;
 
 import android.util.Log;
 
@@ -10,12 +10,12 @@ import org.webrtc.SessionDescription;
  * Created by vivek-3102 on 11/03/17.
  */
 
-class CustomSdpObserver implements SdpObserver {
+public class CustomSdpObserver implements SdpObserver {
 
 
     private String tag;
 
-    CustomSdpObserver(String logTag) {
+    public CustomSdpObserver(String logTag) {
         tag = this.getClass().getCanonicalName();
         this.tag = this.tag + " " + logTag;
     }

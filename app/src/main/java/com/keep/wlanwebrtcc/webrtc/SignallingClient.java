@@ -1,4 +1,4 @@
-package com.keep.wlanwebrtcc;
+package com.keep.wlanwebrtcc.webrtc;
 
 import com.google.gson.Gson;
 import com.keep.wlanwebrtcc.net.INetClient;
@@ -37,7 +37,7 @@ public class SignallingClient {
     INetClient.IReceiveHandler mReceiveHandler = (message, senderIp, senderPort) -> {
         switch (message.getType()) {
             case CALLOUT:
-                mSignalingInterface.callin();
+                mSignalingInterface.callin(senderIp);
                 mNetClient.setRemote(senderIp, senderPort);
                 break;
             case ANSWER:
@@ -100,7 +100,7 @@ public class SignallingClient {
         mNetClient.send(message);
     }
 
-    public void sendAnswer(SessionDescription sessionDescription) {
+    public void sendAnswerSdp(SessionDescription sessionDescription) {
         Message message = new Message(ANSWER_SDP, gson.toJson(sessionDescription));
         mNetClient.send(message);
     }
@@ -123,7 +123,7 @@ public class SignallingClient {
     }
 
 
-    interface SignalingInterface {
+  public   interface SignalingInterface {
         void onRemoteHangUp(String msg);
 
         void onOfferReceived(JSONObject data);
@@ -140,7 +140,7 @@ public class SignallingClient {
 
         void onNewPeerJoined();
 
-        void callin();
+        void callin(String senderIp);
 
         void receiveAnswer();
 

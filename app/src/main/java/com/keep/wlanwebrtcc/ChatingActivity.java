@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.keep.wlanwebrtcc.databinding.ActivityChatingBinding;
 import com.keep.wlanwebrtcc.net.NetUtils;
+import com.keep.wlanwebrtcc.webrtc.CustomPeerConnectionObserver;
+import com.keep.wlanwebrtcc.webrtc.CustomSdpObserver;
+import com.keep.wlanwebrtcc.webrtc.SignallingClient;
 
 import org.json.JSONObject;
 import org.webrtc.AudioSource;
@@ -142,9 +145,9 @@ public class ChatingActivity extends AppCompatActivity {
         binding.remoteGlSurfaceView.setMirror(true);
 
         gotUserMedia = true;
-        if (SignallingClient.getInstance().isInitiator) {
-            onTryToStart();
-        }
+//        if (SignallingClient.getInstance().isInitiator) {
+//            onTryToStart();
+//        }
     }
 
     private void doHungup() {
@@ -322,7 +325,7 @@ public class ChatingActivity extends AppCompatActivity {
         showToast("createOffer");
         sdpConstraints = new MediaConstraints();
         sdpConstraints.mandatory.add(
-                new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "true"));
+                new MediaConstraints.KeyValuePair("OfferToReceiveAudio", "false"));
         sdpConstraints.mandatory.add(
                 new MediaConstraints.KeyValuePair("OfferToReceiveVideo", "true"));
         localPeer.createOffer(new CustomSdpObserver("localCreateOffer") {
@@ -330,7 +333,7 @@ public class ChatingActivity extends AppCompatActivity {
             public void onCreateSuccess(SessionDescription sessionDescription) {
                 super.onCreateSuccess(sessionDescription);
                 localPeer.setLocalDescription(new CustomSdpObserver("localSetLocalDesc"), sessionDescription);
-                Log.d("onCreateSuccess", "SignallingClient emit ");
+                Log.d(TAG, "SignallingClient emit ");
                 showToast("sendOfferSdp");
                 SignallingClient.getInstance().sendOfferSdp(sessionDescription);
             }
@@ -343,7 +346,7 @@ public class ChatingActivity extends AppCompatActivity {
             public void onCreateSuccess(SessionDescription sessionDescription) {
                 super.onCreateSuccess(sessionDescription);
                 localPeer.setLocalDescription(new CustomSdpObserver("localSetLocal"), sessionDescription);
-                SignallingClient.getInstance().sendAnswer(sessionDescription);
+                SignallingClient.getInstance().sendAnswerSdp(sessionDescription);
             }
         }, new MediaConstraints());
     }
@@ -390,7 +393,7 @@ public class ChatingActivity extends AppCompatActivity {
         }
 
         @Override
-        public void callin() {
+        public void callin(String senderIp) {
             runOnUiThread(ChatingActivity.this::callIn);
         }
 

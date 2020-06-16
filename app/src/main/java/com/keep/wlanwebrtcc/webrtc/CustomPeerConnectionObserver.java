@@ -1,4 +1,4 @@
-package com.keep.wlanwebrtcc;
+package com.keep.wlanwebrtcc.webrtc;
 
 import android.util.Log;
 
@@ -13,13 +13,13 @@ import org.webrtc.RtpReceiver;
  * Created by vivek-3102 on 11/03/17.
  */
 
-class CustomPeerConnectionObserver implements PeerConnection.Observer {
+public class CustomPeerConnectionObserver implements PeerConnection.Observer {
 
     private String logTag;
 
-    CustomPeerConnectionObserver(String logTag) {
+    public CustomPeerConnectionObserver(String logTag) {
         this.logTag = this.getClass().getCanonicalName();
-        this.logTag = this.logTag+" "+logTag;
+        this.logTag = this.logTag + " " + logTag;
     }
 
     @Override
